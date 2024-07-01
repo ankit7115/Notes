@@ -27,18 +27,13 @@ def createNote(request):
     return Response(serializer.data)
 
 @api_view(['PUT'])
-def updateNote(request,pk):
-    data = request.data
-    note = Note.objects.get(id = pk)
-    note = Note.objects.create(
-        title = data['title'],
-        body = data['body'],
-    )
-    serializer = NoteSerializer(note, data = request.data)
+def updateNote(request, pk):
+    note = Note.objects.get(pk=pk)
+    serializer = NoteSerializer(note, data=request.data)
     if serializer.is_valid():
         serializer.save()
-    
-    return Response(serializer.data)
+        return Response(serializer.data)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['DELETE'])
 def deleteNote(request,pk):
