@@ -13,7 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-mm4dz5$6#z5c#lv_wx4-e8!1nsismhku%l!cz-dbq0*uu!%y$*"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -27,10 +27,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'api.apps.ApiConfig',
+    # 'api.apps.ApiConfig',
     'rest_framework',
     "corsheaders",
-    'api'
+    "api",
 ]
 
 MIDDLEWARE = [
@@ -80,7 +80,7 @@ WSGI_APPLICATION = "notes_backend.wsgi.application"
 import dj_database_url
 
 DATABASES = {
-    'default' : dj_database_url.parse('postgres://drf_database_mmbz_user:a1gpgpGUetve9eNNxaRrMHB80tmJLCFr@dpg-cndcfs5a73kc73b6in4g-a.singapore-postgres.render.com/drf_database_mmbz')
+    "default" : dj_database_url.parse(os.environ.get("DATABASE_URL")),
 }
 
 # Password validation
